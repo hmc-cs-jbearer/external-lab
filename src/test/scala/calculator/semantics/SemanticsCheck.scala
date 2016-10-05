@@ -15,18 +15,18 @@ object CalcInterpreterSpec extends Properties("Interpreter") {
         val result = eval(input)
         result == output
       }
-      
+
       def ~/~>[T <: Throwable](c: Class[T]) = {
         throws(c){eval(input)}
       }
     }
-    
+
     property("numbers") = forAll { (n: Int) ⇒
       Num(n) ~> n
-    } 
-    
+    }
+
     property("addition") = forAll { (n1: Int, n2: Int) ⇒
-      (Plus(Num(n1), Num(n2))) ~> (n1 + n2)   
-    } 
-    
+      (Plus(Num(n1), Num(n2))) ~> (n1 + n2)
+    }
+
 }
