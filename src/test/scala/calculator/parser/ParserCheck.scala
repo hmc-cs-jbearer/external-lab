@@ -85,4 +85,9 @@ object CalcParseSpec extends Properties("Parser") {
       s"$n1 / $n2 - $n3" ~> (Minus(Divide(Num(n1), Num(n2)), Num(n3)))
     }
 
+    property("parenthetical precedence") =
+    forAll { (n1: Int, n2: Int, n3: Int) =>
+      s"$n1 * ($n2 + $n3)" ~> (Times(Num(n1), Plus(Num(n2), Num(n3))))
+    }
+
 }
