@@ -38,4 +38,20 @@ object CalcParseSpec extends Properties("Parser") {
       s"$n1 - $n2 + $n3" ~> (Plus(Minus(Num(n1), Num(n2)), Num(n3)))
     }
 
+    property("multiplication") = forAll { (n1: Int, n2: Int) =>
+      s"$n1 * $n2" ~> (Times(Num(n1), Num(n2)))
+    }
+
+    property("multiplication/addition precedence") =
+    forAll { (n1: Int, n2: Int, n3: Int) =>
+      s"$n1 + $n2 * $n3" ~> (Plus(Num(n1), Times(Num(n2), Num(n3)))) &&
+      s"$n1 * $n2 + $n3" ~> (Plus(Times(Num(n1), Num(n2)), Num(n3)))
+    }
+
+    property("multiplication/subtraction precedence") =
+    forAll { (n1: Int, n2: Int, n3: Int) =>
+      s"$n1 - $n2 * $n3" ~> (Minus(Num(n1), Times(Num(n2), Num(n3)))) &&
+      s"$n1 * $n2 - $n3" ~> (Minus(Times(Num(n1), Num(n2)), Num(n3)))
+    }
+
 }

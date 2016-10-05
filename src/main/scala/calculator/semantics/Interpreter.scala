@@ -7,5 +7,6 @@ package object semantics {
     case Num(i) ⇒ i
     case Plus(left, right) ⇒ eval(left) + eval(right)
     case Minus(left, right) => eval(left) - eval(right)
+    case Times(left, right) => eval(left) * eval(right)
   }
 }
