@@ -29,4 +29,8 @@ object CalcInterpreterSpec extends Properties("Interpreter") {
       (Plus(Num(n1), Num(n2))) ~> (n1 + n2)
     }
 
+    property("subtraction") = forAll { (n1: Int, n2: Int) =>
+      (Minus(Num(n1), Num(n2))) ~> (n1 - n2)
+    }
+
 }
