@@ -37,4 +37,8 @@ object CalcInterpreterSpec extends Properties("Interpreter") {
       (Times(Num(n1), Num(n2))) ~> (n1 * n2)
     }
 
+    property("division") = forAll { (n1: Int, n2: Int) =>
+      n2 == 0 || (Divide(Num(n1), Num(n2))) ~> (n1 / n2)
+    }
+
 }
